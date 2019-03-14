@@ -1,4 +1,4 @@
-FROM microsoft/vsts-agent:ubuntu-14.04-docker-17.06.0-ce
+FROM microsoft/vsts-agent:ubuntu-14.04-docker-18.06.1-ce
 # Install essential build tools
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \

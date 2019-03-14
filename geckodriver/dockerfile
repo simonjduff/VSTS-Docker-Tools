@@ -1,0 +1,8 @@
+FROM sjddocker.azurecr.io/vsts-docker-grunt
+
+RUN apt-get install -y --no-install-recommends \
+ firefox
+
+RUN curl -sL https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz \
+    | tar -xz \
+    && mv geckodriver /usr/local/bin
