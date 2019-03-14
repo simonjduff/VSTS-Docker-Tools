@@ -2,7 +2,7 @@ FROM microsoft/vsts-agent:ubuntu-14.04-docker-18.06.1-ce
 # Install essential build tools
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-    build-essential \
+    build-essential openssh-client firefox ansible \
 && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
@@ -10,3 +10,7 @@ RUN apt-get update \
  && ~/n/bin/n lts \
  && npm install -g gulp n \
  && rm -rf ~/n
+
+RUN curl -sL https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz \
+    | tar -xz \
+    && mv geckodriver /usr/local/bin
