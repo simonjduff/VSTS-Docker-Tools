@@ -5,6 +5,10 @@ RUN apt-get update \
     build-essential openssh-client firefox ansible python-pip \
 && rm -rf /var/lib/apt/lists/*
 
+RUN pip install setuptools --upgrade \
+    && pip install azure>=2.0.0 --upgrade \
+    && pip install ansible[azure] --upgrade
+
 RUN apt-get update \
  && curl -sL https://git.io/n-install | bash -s -- -ny - \
  && ~/n/bin/n lts \
