@@ -1,8 +1,8 @@
-FROM microsoft/vsts-agent:ubuntu-14.04-docker-18.06.1-ce
+FROM microsoft/vsts-agent:ubuntu-16.04-docker-18.06.1-ce
 # Install essential build tools
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-    build-essential openssh-client firefox ansible \
+    build-essential openssh-client firefox ansible python-pip \
 && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
