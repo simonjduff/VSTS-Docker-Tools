@@ -3,6 +3,7 @@ FROM microsoft/vsts-agent:ubuntu-16.04-docker-18.06.1-ce
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     build-essential openssh-client firefox ansible python-pip \
+    zip unzip \
 && rm -rf /var/lib/apt/lists/*
 
 RUN pip install setuptools --upgrade \
