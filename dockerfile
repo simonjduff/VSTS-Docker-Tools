@@ -23,7 +23,13 @@ RUN apt-get update \
         python3-pip \
         zip unzip \
         software-properties-common \
-        iptables
+        iptables \
+        apt-utils
+
+# Add node source
+RUN curl -fsSL https://deb.nodesource.com/setup_17.x | bash - && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends nodejs
 
 RUN curl -l https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb --output packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb \
@@ -31,14 +37,10 @@ RUN curl -l https://packages.microsoft.com/config/ubuntu/20.04/packages-microsof
     && apt-get update \
     && apt-get install powershell
 
-RUN python3 -m pip install setuptools --upgrade \
-    && python3 -m pip install ansible --upgrade
-
-RUN apt-get update \
- && curl -sL https://git.io/n-install | bash -s -- -ny - \
- && ~/n/bin/n lts \
- && npm install -g gulp n \
- && rm -rf ~/n
+RUN pip3 install --upgrade pip && \
+    pip3 install setuptools ansible requests --upgrade && \
+    ansible-galaxy collection install azure.azcollection && \
+    pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
 
 RUN curl -sL https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz \
     | tar -xz \
